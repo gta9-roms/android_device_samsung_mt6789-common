@@ -150,3 +150,15 @@ BOARD_VNDK_VERSION := current
 
 # Inherit the proprietary files
 include vendor/samsung/mt6789-common/BoardConfigVendor.mk
+
+# Kernel Modules
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.load))
+BOARD_RECOVERY_RAMDISK_KERNEL_MODULES_LOAD := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
+BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
+RECOVERY_KERNEL_MODULES := $(BOARD_RECOVERY_RAMDISK_KERNEL_MODULES_LOAD)
+BOARD_VENDOR_RAMDISK_FRAGMENTS := dlkm
+BOARD_VENDOR_RAMDISK_FRAGMENT.dlkm.KERNEL_MODULE_DIRS := top
+
+# Prebuilt kernel
+TARGET_KERNEL_DIR := device/samsung/gta9/prebuilt
+TARGET_PREBUILT_KERNEL := device/samsung/gta9/prebuilt/kernel
